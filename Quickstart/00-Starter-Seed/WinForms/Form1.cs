@@ -10,21 +10,25 @@ namespace WindowsFormsSample
 {
     public partial class Form1 : Form
     {
+        private Auth0Client client;
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        private async void loginButton_Click(object sender, EventArgs e)
+        private async void LoginButton_Click(object sender, EventArgs e)
         {
             string domain = ConfigurationManager.AppSettings["Auth0:Domain"];
             string clientId = ConfigurationManager.AppSettings["Auth0:ClientId"];
 
-            var client = new Auth0Client(new Auth0ClientOptions
+            Auth0ClientOptions clientOptions = new Auth0ClientOptions
             {
                 Domain = domain,
                 ClientId = clientId
-            });
+            };
+            client = new Auth0Client(clientOptions);
+            clientOptions.PostLogoutRedirectUri = clientOptions.RedirectUri;
 
             var extraParameters = new Dictionary<string, string>();
 
@@ -46,6 +50,9 @@ namespace WindowsFormsSample
                 return;
             }
 
+            loginButton.Visible = false;
+            logoutButton.Visible = true;
+
             // Display result
             StringBuilder sb = new StringBuilder();
 
@@ -64,6 +71,18 @@ namespace WindowsFormsSample
             }
 
             resultTextBox.Text = sb.ToString();
+        }
+
+        private async void LogoutButton_Click(object sender, EventArgs e)
+        {
+            await client.LogoutAsync();
+
+            logoutButton.Visible = false;
+            loginButton.Visible = true;
+
+            resultTextBox.Text = "";
+            audienceTextBox.Text = "";
+            connectionNameComboBox.Text = "";
         }
     }
 }

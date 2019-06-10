@@ -23,6 +23,8 @@ namespace WPFSample
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Auth0Client client;
+
         string[] _connectionNames = new string[]
         {
             "Username-Password-Authentication",
@@ -43,7 +45,7 @@ namespace WPFSample
             string domain = ConfigurationManager.AppSettings["Auth0:Domain"];
             string clientId = ConfigurationManager.AppSettings["Auth0:ClientId"];
 
-            var client = new Auth0Client(new Auth0ClientOptions
+            client = new Auth0Client(new Auth0ClientOptions
             {
                 Domain = domain,
                 ClientId = clientId
@@ -69,6 +71,9 @@ namespace WPFSample
                 return;
             }
 
+            logoutButton.Visibility = Visibility.Visible;
+            loginButton.Visibility = Visibility.Collapsed;
+
             // Display result
             StringBuilder sb = new StringBuilder();
 
@@ -91,6 +96,18 @@ namespace WPFSample
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            connectionNameComboBox.ItemsSource = _connectionNames;
+        }
+
+        private async void LogoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            await client.LogoutAsync();
+
+            logoutButton.Visibility = Visibility.Collapsed;
+            loginButton.Visibility = Visibility.Visible;
+
+            audienceTextBox.Text = "";
+            resultTextBox.Text = "";
             connectionNameComboBox.ItemsSource = _connectionNames;
         }
     }
