@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 using Auth0.OidcClient;
 using IdentityModel.OidcClient;
+using IdentityModel.OidcClient.Browser;
 
 namespace WindowsFormsSample
 {
@@ -22,13 +23,11 @@ namespace WindowsFormsSample
             string domain = ConfigurationManager.AppSettings["Auth0:Domain"];
             string clientId = ConfigurationManager.AppSettings["Auth0:ClientId"];
 
-            Auth0ClientOptions clientOptions = new Auth0ClientOptions
+            client = new Auth0Client(new Auth0ClientOptions
             {
                 Domain = domain,
                 ClientId = clientId
-            };
-            client = new Auth0Client(clientOptions);
-            clientOptions.PostLogoutRedirectUri = clientOptions.RedirectUri;
+            });
 
             var extraParameters = new Dictionary<string, string>();
 
@@ -75,7 +74,13 @@ namespace WindowsFormsSample
 
         private async void LogoutButton_Click(object sender, EventArgs e)
         {
-            await client.LogoutAsync();
+            BrowserResultType browserResult = await client.LogoutAsync();
+
+            if (browserResult != BrowserResultType.Success)
+            {
+                resultTextBox.Text = browserResult.ToString();
+                return;
+            }
 
             logoutButton.Visible = false;
             loginButton.Visible = true;

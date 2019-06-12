@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Auth0.OidcClient;
 using IdentityModel.OidcClient;
+using IdentityModel.OidcClient.Browser;
 
 namespace WPFSample
 {
@@ -101,7 +102,13 @@ namespace WPFSample
 
         private async void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
-            await client.LogoutAsync();
+            BrowserResultType browserResult = await client.LogoutAsync();
+
+            if (browserResult != BrowserResultType.Success)
+            {
+                resultTextBox.Text = browserResult.ToString();
+                return;
+            }
 
             logoutButton.Visibility = Visibility.Collapsed;
             loginButton.Visibility = Visibility.Visible;
