@@ -35,6 +35,7 @@
             this.connectionNameComboBox = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.audienceTextBox = new System.Windows.Forms.TextBox();
+            this.logoutButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -55,7 +56,7 @@
             this.loginButton.TabIndex = 2;
             this.loginButton.Text = "Login";
             this.loginButton.UseVisualStyleBackColor = true;
-            this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
+            this.loginButton.Click += new System.EventHandler(this.LoginButton_Click);
             // 
             // label2
             // 
@@ -115,11 +116,24 @@
             this.audienceTextBox.Size = new System.Drawing.Size(574, 20);
             this.audienceTextBox.TabIndex = 7;
             // 
+            // logoutButton
+            // 
+            this.logoutButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.logoutButton.Location = new System.Drawing.Point(581, 65);
+            this.logoutButton.Name = "logoutButton";
+            this.logoutButton.Size = new System.Drawing.Size(75, 23);
+            this.logoutButton.TabIndex = 8;
+            this.logoutButton.Text = "Logout";
+            this.logoutButton.UseVisualStyleBackColor = true;
+            this.logoutButton.Visible = false;
+            this.logoutButton.Click += new System.EventHandler(this.LogoutButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(668, 487);
+            this.Controls.Add(this.logoutButton);
             this.Controls.Add(this.audienceTextBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.connectionNameComboBox);
@@ -144,6 +158,7 @@
         private System.Windows.Forms.ComboBox connectionNameComboBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox audienceTextBox;
+        private System.Windows.Forms.Button logoutButton;
     }
 }
 

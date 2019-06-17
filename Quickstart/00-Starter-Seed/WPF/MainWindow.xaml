@@ -8,6 +8,7 @@
         Title="Auth0 OIDC Client Sample" Height="541.686" Width="525" Loaded="Window_Loaded">
     <Grid Margin="0,0,2,0">
         <Button x:Name="loginButton" Content="Login" VerticalAlignment="Top" Margin="0,65,8,0" Click="LoginButton_OnClick" HorizontalAlignment="Right" Width="75"/>
+        <Button x:Name="logoutButton" Content="Logout" VerticalAlignment="Top" Margin="0,65,8,0" Click="LogoutButton_Click" HorizontalAlignment="Right" Width="75" Visibility="Collapsed"/>
         <TextBox x:Name="resultTextBox" TextWrapping="Wrap" Text="" Margin="10,110,8,10" FontFamily="Courier New"/>
         <Label x:Name="label" Content="Connection:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label1" Content="Audience:" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.873,2.178" Margin="10,33,0,0"/>
