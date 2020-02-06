@@ -1,21 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Auth0.OidcClient;
+﻿using Auth0.OidcClient;
 using IdentityModel.OidcClient;
 using IdentityModel.OidcClient.Browser;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Text;
+using System.Windows;
 
 namespace WPFSample
 {
@@ -25,8 +14,7 @@ namespace WPFSample
     public partial class MainWindow : Window
     {
         private Auth0Client client;
-
-        string[] _connectionNames = new string[]
+        readonly string[] _connectionNames = new string[]
         {
             "Username-Password-Authentication",
             "google-oauth2",
