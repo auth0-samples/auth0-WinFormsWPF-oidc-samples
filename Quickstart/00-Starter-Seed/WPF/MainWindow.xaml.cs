@@ -37,7 +37,8 @@ namespace WPFSample
             client = new Auth0Client(new Auth0ClientOptions
             {
                 Domain = domain,
-                ClientId = clientId
+                ClientId = clientId,
+                Browser = new WebViewBrowser()
             });
 
             var extraParameters = new Dictionary<string, string>();
