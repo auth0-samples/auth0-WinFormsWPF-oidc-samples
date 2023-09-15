@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace WindowsFormsSample
 {
-    static class Program
+    internal static class Program
     {
         /// <summary>
         /// The main entry point for the application.
@@ -11,8 +11,7 @@ namespace WindowsFormsSample
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            ApplicationConfiguration.Initialize();
             Application.Run(new Form1());
         }
     }
