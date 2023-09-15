@@ -19,7 +19,7 @@ jobs:
     runs-on: windows-latest
 
     env:
-      Solution_Path: Quickstart\00-Started-Seed\WinForms\WindowsFormsSample.sln
+      Solution_Path: Quickstart\00-Starter-Seed\WinForms\WindowsFormsSample.sln
 
     steps:
     - name: Checkout

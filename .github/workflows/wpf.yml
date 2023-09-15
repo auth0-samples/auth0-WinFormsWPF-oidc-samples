@@ -19,7 +19,7 @@ jobs:
     runs-on: windows-latest
 
     env:
-      Solution_Path: Quickstart\00-Started-Seed\WPF\WPFSample.sln
+      Solution_Path: Quickstart\00-Starter-Seed\WPF\WPFSample.sln
 
     steps:
     - name: Checkout
