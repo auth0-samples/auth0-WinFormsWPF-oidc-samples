@@ -1,0 +1,47 @@
+name:  Build WPF
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+
+  build:
+
+    strategy:
+      matrix:
+        targetplatform: [x86, x64]
+
+    runs-on: windows-latest
+
+    env:
+      Solution_Path: Quickstart\00-Started-Seed\WPF\WPFSample.sln
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Install .NET Core
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '6.0.x'
+
+    - name: Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@v1.1
+
+    - name:  Restore
+      run: msbuild $env:Solution_Path /t:Restore /p:Configuration=$env:Configuration
+      env:
+        Configuration: Release
+
+    - name: Build
+      run: msbuild $env:Solution_Path /p:Platform=$env:TargetPlatform /p:Configuration=$env:Configuration
+      env:
+        BuildMode: SideloadOnly
+        Configuration: Release
+        TargetPlatform: ${{ matrix.targetplatform }}
+
