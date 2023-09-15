@@ -1,0 +1,34 @@
+name:  Build WinForms
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+
+  build:
+
+    runs-on: windows-latest
+
+    env:
+      Solution_Path: Quickstart\00-Starter-Seed\WinForms\WindowsFormsSample.sln
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Install .NET Core
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '6.0.x'
+
+    - name: Install dependencies
+      run: dotnet restore $env:Solution_Path
+
+    - name: Build
+      run: dotnet build $env:Solution_Path --configuration Release --no-restore
+
